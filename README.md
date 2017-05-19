@@ -1,2 +1,2 @@
 # proxy
-Proxy
+Crossplatform Proxy Server

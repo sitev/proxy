@@ -4,6 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "proxy", "proxy.vcxproj", "{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}"
+	ProjectSection(ProjectDependencies) = postProject
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41} = {693AA60A-99A8-4B66-9F4D-BD247D213C41}
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA} = {95C32FB2-32DC-45FF-B513-7E117514D8CA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "..\..\..\core\vs2015\core\core.vcxproj", "{95C32FB2-32DC-45FF-B513-7E117514D8CA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "network", "..\..\..\network\vs2015\network\network.vcxproj", "{693AA60A-99A8-4B66-9F4D-BD247D213C41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA} = {95C32FB2-32DC-45FF-B513-7E117514D8CA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +32,20 @@ Global
 		{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}.Release|x64.Build.0 = Release|x64
 		{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}.Release|x86.ActiveCfg = Release|Win32
 		{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}.Release|x86.Build.0 = Release|Win32
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Debug|x64.ActiveCfg = Debug|x64
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Debug|x64.Build.0 = Debug|x64
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Debug|x86.ActiveCfg = Debug|Win32
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Debug|x86.Build.0 = Debug|Win32
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Release|x64.ActiveCfg = Release|x64
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Release|x64.Build.0 = Release|x64
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Release|x86.ActiveCfg = Release|Win32
+		{95C32FB2-32DC-45FF-B513-7E117514D8CA}.Release|x86.Build.0 = Release|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Debug|x64.ActiveCfg = Debug|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Debug|x86.ActiveCfg = Debug|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Debug|x86.Build.0 = Debug|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Release|x64.ActiveCfg = Release|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Release|x86.ActiveCfg = Release|Win32
+		{693AA60A-99A8-4B66-9F4D-BD247D213C41}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

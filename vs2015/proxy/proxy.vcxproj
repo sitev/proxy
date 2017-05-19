@@ -19,7 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\handler.cpp" />
     <ClCompile Include="..\..\src\proxy.cpp" />
+    <ClCompile Include="..\..\src\server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\handler.h" />
+    <ClInclude Include="..\..\src\proxy.h" />
+    <ClInclude Include="..\..\src\server.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}</ProjectGuid>
@@ -74,6 +81,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\..\core\src;..\..\..\network\src;$(IncludePath)</IncludePath>
+    <LibraryPath>Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
