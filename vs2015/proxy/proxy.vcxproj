@@ -81,7 +81,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\..\core\src;..\..\..\network\src;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\core\src;..\..\..\network\src;..\..\..\http\src;$(IncludePath)</IncludePath>
     <LibraryPath>Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

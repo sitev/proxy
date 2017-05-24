@@ -1,9 +1,8 @@
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include "proxy.h"
 
-#ifdef OS_WINDOWS
-#pragma comment(lib, "core.lib")
-#pragma comment(lib, "network.lib")
-#endif
+
 
 namespace proxy {
 
@@ -16,36 +15,78 @@ namespace proxy {
 		delete socket;
 	}
 
-	void Handler::step() {
-		if (!isRunning) return;
+	bool Handler::step() {
+		if (!isRunning) return false;
 
-		Memory buf;
 		buf.setPos(0);
-		int len = socket->recv(buf);
+		buf.setReadPos(0);
+		
+		int len = socket->recv_new(buf);
+		cout << "recv " << len << endl;
 		if (len > 0) {
-			buf.setPos(0);
+			if (!isConnected) {
+				bool flag = parser.parse(buf);
+				if (flag) {
+					Str method = parser.getMethod();
+					Str host = parser.getHost();
+					int port = parser.getPort();
+					cout << "method = " << method.to_string() << " host = " << host.to_string() <<
+						" port = " << port << endl;
 
-			/* Как-то должен бужет работать...
-			socketSrv = new Socket();
-			if (!socketSrv->create()) return false;
+					socketSrv = new Socket();
+					if (!socketSrv->create()) return false;
+					Str addr = getIpByHost(host);
+					if (addr == "") return false;
+					flag = socketSrv->connect(addr, port);
+					if (!flag) return false;
+					socketSrv->setNonBlocking(true);
 
-			socketSrv->setNonBlocking(true);
-			socketSrv->connect(addr, port);
-			*/
-
-			///socketSrv->send(buf.data, len);
-			cout << "send " << len << endl;
-			for (int i = 0; i < len; i++) cout << buf.data[i];
-			cout << endl;
+					if (method == "CONNECT") {
+						string s = "HTTP/1.1 200 Connection established\r\n\r\n";
+						Memory mem;
+						mem.write((void*)s.c_str(), s.length());
+						socket->send(mem);
+					}
+					else 
+						socketSrv->send(buf.data, len);
+					isConnected = true;
+					return true;
+				}
+			}
+			len = socketSrv->send(buf.data, len);
+			if (len < 0) {
+#ifdef OS_WINDOWS
+				int err = WSAGetLastError();
+				if (err != WSAEWOULDBLOCK) {
+					isRunning = false;
+					return false;
+				}
+#endif
+			}
 		}
-		return;
 
-		buf.setPos(0);
-		len = socketSrv->recv(buf);
-		if (len > 0) {
+		if (isConnected) {
 			buf.setPos(0);
-			socket->send(buf.data, len);
-			cout << "send " << len << endl;
+			buf.setReadPos(0);
+
+			int len = socketSrv->recv_new(buf);
+			cout << "recv Srv " << len << endl;
+			if (len > 0) {
+				buf.setPos(0);
+				buf.setReadPos(0);
+				socket->send(buf.data, len);
+				cout << "send " << len << endl;
+			}
+			else if (len < 0) {
+#ifdef OS_WINDOWS
+				int err = WSAGetLastError();
+				if (err != WSAEWOULDBLOCK && err != 0) {
+					isRunning = false;
+					return false;
+				}
+#endif
+			}
+
 		}
 	}
 }
