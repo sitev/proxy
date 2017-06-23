@@ -22,11 +22,15 @@
     <ClCompile Include="..\..\src\handler.cpp" />
     <ClCompile Include="..\..\src\proxy.cpp" />
     <ClCompile Include="..\..\src\server.cpp" />
+    <ClCompile Include="..\..\src\socks5handler.cpp" />
+    <ClCompile Include="..\..\src\socks5server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\handler.h" />
     <ClInclude Include="..\..\src\proxy.h" />
     <ClInclude Include="..\..\src\server.h" />
+    <ClInclude Include="..\..\src\socks5handler.h" />
+    <ClInclude Include="..\..\src\socks5server.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DBEAF6B7-2252-4A7D-90F8-2503BDEFD017}</ProjectGuid>
@@ -89,6 +93,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>..\..\..\core\src;..\..\..\network\src;..\..\..\http\src;$(IncludePath)</IncludePath>
+    <LibraryPath>Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -101,6 +107,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <PrecompiledHeaderFile />
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,11 +116,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,12 +131,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile />
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

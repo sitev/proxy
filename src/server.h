@@ -1,26 +1,28 @@
 #pragma once
 
-#include "network.h"
-#include "proxy.h"
+//#include "network.h"
+//#include "proxy.h"
 
-#define MAX_SOCK 10000
+#define MAX_SOCK 100000
 
 namespace proxy {
 
 	class Server {
 	protected:
 		int port;
-		cj::ServerSocket *ss;
-		Handler* arrHandler[MAX_SOCK];
-		List lstHandler;
+		ServerSocket *ss;
 		bool isRunning = false;
 		SOCKET maxsock = 0;
 	public:
+		Handler* arrHandler[MAX_SOCK];
+		List lstHandler;
+		SocketHandler *sohandler;
 		Server(int port);
 		virtual bool init();
 		virtual bool run();
-		virtual bool step();
 
+		virtual Handler* newHandler(Server *server, Socket *socket = NULL, Socket *socketTo = NULL);
+		virtual bool step();
 	};
 
 }

@@ -16,7 +16,7 @@ int main()
 {
 	cout << "start proxy" << endl;
 
-	proxy::Server *app = new proxy::Server(8080);
+	proxy::Server *app = new proxy::Socks5Server(8080);
 	app->init();
 	app->run();
 	return 0;
