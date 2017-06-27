@@ -121,14 +121,14 @@ namespace proxy {
 		server->lstHandler.del(this);
 		if (socket != NULL) {
 			server->arrHandler[socket->m_sock] = NULL;
-			server->sohandler->delSock(socket->m_sock);
+			server->sohandler->del(socket->m_sock);
 		}
 		if (socketTo != NULL) {
 			Handler *handler2 = server->arrHandler[this->socketTo->m_sock];
 			if (handler2 != NULL) {
 				server->lstHandler.del(handler2);
 				server->arrHandler[socketTo->m_sock] = NULL;
-				server->sohandler->delSock(socketTo->m_sock);
+				server->sohandler->del(socketTo->m_sock);
 				delete handler2;
 			}
 		}
